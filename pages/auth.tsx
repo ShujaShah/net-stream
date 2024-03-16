@@ -39,6 +39,15 @@ const Auth = () => {
                   value={password}
                 />
               </div>
+              <button className="bg-red-600 mt-4 py-3 text-white rounded-md w-full  hover:bg-red-700 transition">
+                Login
+              </button>
+              <p className="text-neutral-500 mt-12">
+                First time using Netflix?
+                <span className="text-white ml-1 hover: underline cursor-pointer">
+                  Create an Account
+                </span>
+              </p>
             </div>
           </div>
         </nav>
