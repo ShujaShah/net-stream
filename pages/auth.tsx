@@ -45,6 +45,21 @@ const Auth = () => {
     }
   }, [email, name, password, login]);
 
+  function handleEmail(e: any) {
+    e.preventDefault();
+    setEmail(e.target.value);
+  }
+
+  function handlePassword(e: any) {
+    e.preventDefault();
+    setPassword(e.target.value);
+  }
+
+  function handleUsername(e: any) {
+    e.preventDefault();
+    setName(e.target.value);
+  }
+
   return (
     <div className="relative h-full  w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
       <div className="bg-black w-full h-full lg: bg-opacity-50">
@@ -59,7 +74,7 @@ const Auth = () => {
                 {variant === 'register' && (
                   <Input
                     label="Username"
-                    onChange={(e: any) => setName(e.target.value)}
+                    onChange={handleUsername}
                     id="name"
                     type="text"
                     value={name}
@@ -67,7 +82,7 @@ const Auth = () => {
                 )}
                 <Input
                   label="Email"
-                  onChange={(e: any) => setEmail(e.target.value)}
+                  onChange={handleEmail}
                   id="email"
                   type="email"
                   value={email}
@@ -75,7 +90,7 @@ const Auth = () => {
 
                 <Input
                   label="Password"
-                  onChange={(e: any) => setPassword(e.target.value)}
+                  onChange={handlePassword}
                   id="password"
                   type="password"
                   value={password}
@@ -89,13 +104,21 @@ const Auth = () => {
               </button>
               <div className="flex flex-row items-center gap-4 mt-8 justify-center">
                 <div
-                  onClick={() => signIn('google', { callbackUrl: '/profiles' })}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn('google', {
+                      callbackUrl: '/profiles',
+                    });
+                  }}
                   className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
                 >
                   <FcGoogle size={32} />
                 </div>
                 <div
-                  onClick={() => signIn('github', { callbackUrl: '/profiles' })}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn('github', { callbackUrl: '/profiles' });
+                  }}
                   className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
                 >
                   <FaGithub size={32} />
