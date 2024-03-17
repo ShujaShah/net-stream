@@ -1,5 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
+import type { MongoClient } from 'mongodb';
 
 declare global {
-  var prismadb: PrismaClient | undefined;
+  namespace globalThis {
+    var prismadb: PrismaClient;
+  }
 }
