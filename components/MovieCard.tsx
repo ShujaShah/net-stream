@@ -3,12 +3,11 @@ import { useRouter } from 'next/router';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { PlayIcon } from '@heroicons/react/24/solid';
 
-import { MovieInterface } from '@/types';
 import FavoriteButton from '@/components/FavoriteButton';
 import useInfoModalStore from '@/hooks/useInfoModalStore';
 
 interface MovieCardProps {
-  data: MovieInterface;
+  data: Record<string, any>;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
