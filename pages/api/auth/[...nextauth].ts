@@ -5,6 +5,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { compare } from 'bcrypt';
 import prismadb from '../../../lib/prismadb';
+import { Adapter } from 'next-auth/adapters';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -61,7 +62,7 @@ export const authOptions: AuthOptions = {
     signIn: '/auth',
   },
   debug: process.env.NODE_ENV === 'development',
-  adapter: PrismaAdapter(prismadb),
+  adapter: PrismaAdapter(prismadb) as Adapter,
   session: { strategy: 'jwt' },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
