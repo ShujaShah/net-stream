@@ -7,7 +7,7 @@ const serverAuth = async (req: NextApiRequest) => {
   const session = await getSession({ req });
 
   if (!session?.user?.email) {
-    throw new Error('Not signed in');
+    throw new Error('Not signed in..');
   }
   const currentUser = await prismadb.user.findUnique({
     where: {
