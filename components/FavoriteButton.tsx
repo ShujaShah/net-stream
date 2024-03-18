@@ -40,6 +40,8 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
 
   const Icon = isFavorite ? CheckIcon : PlusIcon;
 
+  if (!currentUser) return;
+
   return (
     <div
       onClick={toggleFavorites}

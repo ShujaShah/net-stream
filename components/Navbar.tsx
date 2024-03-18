@@ -8,6 +8,8 @@ import {
 import AccountMenu from '@/components/AccountMenu';
 import MobileMenu from '@/components/MobileMenu';
 import NavbarItem from '@/components/NavbarItem';
+import useCurrentUser from '@/hooks/useCurrentUser';
+import Link from 'next/link';
 
 const TOP_OFFSET = 66;
 
@@ -15,6 +17,8 @@ const Navbar = () => {
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
+
+  const { data: currentUser } = useCurrentUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,20 +80,32 @@ const Navbar = () => {
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BellIcon className="w-6" />
           </div>
-          <div
-            onClick={toggleAccountMenu}
-            className="flex flex-row items-center gap-2 cursor-pointer relative"
-          >
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-              <img src="/images/default-blue.png" alt="" />
+
+          {currentUser ? (
+            <div
+              onClick={toggleAccountMenu}
+              className="flex flex-row items-center gap-2 cursor-pointer relative"
+            >
+              <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+                <img src="/images/default-blue.png" alt="" />
+              </div>
+              <ChevronDownIcon
+                className={`w-4 text-white fill-white transition ${
+                  showAccountMenu ? 'rotate-180' : 'rotate-0'
+                }`}
+              />
+              <AccountMenu visible={showAccountMenu} />
             </div>
-            <ChevronDownIcon
-              className={`w-4 text-white fill-white transition ${
-                showAccountMenu ? 'rotate-180' : 'rotate-0'
-              }`}
-            />
-            <AccountMenu visible={showAccountMenu} />
-          </div>
+          ) : (
+            <div
+              onClick={toggleAccountMenu}
+              className="flex flex-row items-center gap-2 cursor-pointer relative"
+            >
+              <Link href="/auth">
+                <span className="text-white">Login</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>
